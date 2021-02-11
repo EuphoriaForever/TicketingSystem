@@ -1,0 +1,218 @@
+<%- include('./partials/header'); -%>
+
+    <%- include('./partials/customerSidebar'); -%>
+    <div class="main-panel">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top " id="navigation-example">
+        <div class="container-fluid">
+          <div class="navbar-wrapper">
+            <a class="navbar-brand" href="javascript:void(0)">Dashboard</a>
+          </div>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation" data-target="#navigation-example">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end">
+            <form class="navbar-form">
+              <div class="input-group no-border">
+                <input type="text" value="" class="form-control" placeholder="Search...">
+                <button type="submit" class="btn btn-default btn-round btn-just-icon">
+                  <i class="material-icons">search</i>
+                  <div class="ripple-container"></div>
+                </button>
+              </div>
+            </form>
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="javascript:void(0)">
+                  <i class="material-icons">dashboard</i>
+                  <p class="d-lg-none d-md-block">
+                    Stats
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link" href="javscript:void(0)" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="material-icons">notifications</i>
+                  <span class="notification">5</span>
+                  <p class="d-lg-none d-md-block">
+                    Some Actions
+                  </p>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="javascript:void(0)">Mike John responded to your email</a>
+                  <a class="dropdown-item" href="javascript:void(0)">You have 5 new tasks</a>
+                  <a class="dropdown-item" href="javascript:void(0)">You're now friend with Andrew</a>
+                  <a class="dropdown-item" href="javascript:void(0)">Another Notification</a>
+                  <a class="dropdown-item" href="javascript:void(0)">Another One</a>
+                </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="javascript:void(0)">
+                  <i class="material-icons">person</i>
+                  <p class="d-lg-none d-md-block">
+                    Account
+                  </p>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- End Navbar -->
+      <!--This is where we start for partials adminDash-->
+      <div class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <% for (let x=0 ; x < event.length && x < 3 ; x++){%> 
+            <div class="col-xl-4 col-lg-12">
+                <div class="card card-chart">
+                    <div class="card-header card-header-success">
+                      <div class="ct-chart" id="dailySalesChart"></div>
+                    </div>
+                    <div class="card-body">
+                      <h4 class="card-title"><%=event[x].eventName%> </h4>
+                      <p class="card-category"><%=event[x].eventVenue%></p>
+                    </div>
+                    <div class="card-footer">
+                      <div class="stats">
+                        <a href="/addTicket/<%= event[x].event_ID%>" class="success-link">Click Here </a> for more details
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <% } %> 
+                </div>
+                <div class="row">
+                <%for(let y=3 ; y < event.length && y < 7 ; y++){ %>
+                  <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                    <div class="card card-stats">
+                      <div class="card-header card-header-success card-header-icon">
+                        <div class="card-icon">
+                          <i class="material-icons">content_copy</i>
+                        </div>
+                        <p class="card-category"><%=event[y].eventVenue %></p>
+                        <h3 class="card-title"><%=event[y].eventName %>
+                         
+                        </h3>
+                      </div>
+                      <div class="card-footer">
+                        <div class="stats">
+                          
+                          <a href="/addTicket/<%= event[y].event_ID%>" class="success-link">Click Here </a> for more details
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <% } %> 
+                </div>
+                <div class="row">
+                <div class="col-lg-6 col-md-12">
+                  <div class="card">
+                    <div class="card-header card-header-primary">
+                      <h4 class="card-title">Events Purchased: </h4>
+                      <p class="card-category">New event on 15th September, 2016</p>
+                    </div>
+                    <div class="card-body table-responsive">
+                      <table class="table table-hover">
+                        <thead class="text-warning">
+                          <th>ID</th>
+                          <th>Event</th>
+                          <th>Venue</th>
+                          <th>Qty</th>
+                        </thead>
+                        <tbody>
+                            <!--Loop here must be only the TR na tags but only up to 4 events. the rest must be on the page najd-->
+                          <% purchase.forEach((purchase)=>{ %>
+                              <tr>
+                                <td><%=purchase.event_ID%></td>
+                                <td><%=purchase.eventName%></td>
+                                <td><%=purchase.eventVenue%></td>
+                                <td><%=purchase.qty%></td>
+                              </tr>
+                          <%  }) %> 
+                        </tbody>
+                      </table>
+                      <a class="btn btn-primary pull-left" href="/custPurchase">See more</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                   <div class="card">
+                        <div class="card-header card-header-tabs card-header-warning">
+                          <div class="nav-tabs-navigation">
+                            <div class="nav-tabs-wrapper">
+                              <span class="nav-tabs-title">Tickets in Cart:</span>
+                              <ul class="nav nav-tabs" data-tabs="tabs">
+                                <li class="nav-item">
+                                  <a class="nav-link" href="#settings" data-toggle="tab">
+                                    <i class="material-icons">shopping_cart</i> 
+                                    <div class="ripple-container"></div>
+                                  </a>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="card-body">
+                          <div class="tab-content">   
+                            <div class="tab-pane active" id="settings">
+                              <table class="table">
+                                <thead class="text-warning">
+                                  <th>Event</th>
+                                  <th>Venue</th>
+                                  <th>Qty</th>
+                                </thead>
+                                <tbody>
+                                   <!--This is where the loop for our retrieving status 0 will be-->
+                                   <% cart.forEach((cart)=>{ %>
+                                      <tr>
+                                        <!--LOOP FOR THE ROWS WILL START HERE-->
+                                      <td><%=cart.eventName%></td>
+                                      <td><%=cart.eventVenue %> </td>
+                                      <td><%=cart.qty%></td>
+                                      <td class="td-actions text-right">
+                                        <a title="process your purchase" class="btn btn-white btn-link btn-sm" href="editTicket/<%= cart.ticket_ID%>&<%= cart.event_ID%>">   <!-- cart.acc_ID%>  -->
+                                          <i class="material-icons">payment</i>
+                                        </a>
+                                        <a title="Remove event" class="btn btn-white btn-link btn-sm" href="deleteTicket/<%= purchase.ticket_ID%>">
+                                          <i class="material-icons">close</i>
+                                        </a>
+                                      </td>
+                                    </tr>
+                                   
+                                  <% }) %> 
+                                  <!--End of loop here-->
+                                  
+                                </tbody>
+                              </table>
+                              <a class="btn btn-warning pull-left" href="/custCart">See more</a>
+                            </div>
+                            <!--The next time we will get from our database, the foreach must have this
+                            
+                            <div class="tab-pane active" id="settings">
+                              <table class="table">
+                                <tbody>
+                                  <tr>
+                                   
+                                     <td></td>
+                                    <td class="td-actions text-right">
+                                      <button type="button" rel="tooltip" title="Edit Task" class="btn btn-white btn-link btn-sm">
+                                        <i class="material-icons">edit</i>
+                                      </button>
+                                      <button type="button" rel="tooltip" title="Remove" class="btn btn-white btn-link btn-sm">
+                                        <i class="material-icons">close</i>
+                                      </button>
+                                    </td>
+                                  </tr>
+                                  
+                            -->
+                          </div>
+                        </div>
+                      </div>
+                   
+                </div>
+      <!--This is where we stop for partials-->
+      <%- include('./partials/footer'); -%>

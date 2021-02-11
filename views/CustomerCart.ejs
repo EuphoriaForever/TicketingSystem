@@ -1,0 +1,152 @@
+<%- include('./partials/header'); -%>
+   
+    <%- include('./partials/customerSidebar'); -%>
+    <div class="main-panel">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top " id="navigation-example">
+        <div class="container-fluid">
+          <div class="navbar-wrapper">
+            <a class="navbar-brand" href="javascript:void(0)">Shopping Cart</a>
+          </div>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation" data-target="#navigation-example">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end">
+            <form class="navbar-form">
+              <div class="input-group no-border">
+                <input type="text" value="" class="form-control" placeholder="Search...">
+                <button type="submit" class="btn btn-default btn-round btn-just-icon">
+                  <i class="material-icons">search</i>
+                  <div class="ripple-container"></div>
+                </button>
+              </div>
+            </form>
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="javascript:void(0)">
+                  <i class="material-icons">dashboard</i>
+                  <p class="d-lg-none d-md-block">
+                    Stats
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link" href="javscript:void(0)" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="material-icons">notifications</i>
+                  <span class="notification">5</span>
+                  <p class="d-lg-none d-md-block">
+                    Some Actions
+                  </p>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="javascript:void(0)">Mike John responded to your email</a>
+                  <a class="dropdown-item" href="javascript:void(0)">You have 5 new tasks</a>
+                  <a class="dropdown-item" href="javascript:void(0)">You're now friend with Andrew</a>
+                  <a class="dropdown-item" href="javascript:void(0)">Another Notification</a>
+                  <a class="dropdown-item" href="javascript:void(0)">Another One</a>
+                </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="javascript:void(0)">
+                  <i class="material-icons">person</i>
+                  <p class="d-lg-none d-md-block">
+                    Account
+                  </p>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- End Navbar -->
+      <div class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+                <!--4 divs-->
+                <div class="card">
+                    <div class="card-header card-header-tabs card-header-warning">
+                      <div class="nav-tabs-navigation">
+                        <div class="nav-tabs-wrapper">
+                          <span class="nav-tabs-title">Emails on:</span>
+                          <ul class="nav nav-tabs" data-tabs="tabs">
+                            <li class="nav-item">
+                              <a class="nav-link" href="#settings" data-toggle="tab">
+                                <i class="material-icons">cloud</i> Collabs
+                                <div class="ripple-container"></div>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <div class="tab-content">   
+                        <div class="tab-pane active" id="settings">
+                          <table class="table">
+                            <thead class="text-warning">
+                              
+                              <th>Event</th>
+                              <th>Venue</th>
+                              <th>Qty</th>
+                            </thead>
+                            <tbody>
+                                <% cart.forEach((cart)=>{ %>
+                                    <tr>
+                                    <td><%=cart.eventName%></td>
+                                    <td><%=cart.eventVenue %> </td>
+                                    <td><%=cart.qty%></td>
+                                    <td class="td-actions text-right">
+                                      <a title="Process your Purchase" class="btn btn-white btn-link btn-sm" href="editTicket/<%= cart.ticket_ID%>&<%= cart.event_ID%>"> <!-- cart.acc_ID%>  -->
+                                        <i class="material-icons">payment</i>
+                                      </a>
+                                      <a title="Remove event" class="btn btn-white btn-link btn-sm" href="deleteCart/<%= cart.ticket_ID%>">
+                                        <i class="material-icons">close</i>
+                                      </a>
+                                    </td>
+                                  </tr>
+                                <% }) %> 
+                              <!--LOOP FOR THE ROWS WILL START HERE-->
+                            </tbody>
+                          </table>
+                        </div>
+                        <!--The next time we will get from our database, the foreach must have this
+                        
+                        <div class="tab-pane active" id="settings">
+                          <table class="table">
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <div class="form-check">
+                                    <label class="form-check-label">
+                                      <input class="form-check-input" type="checkbox" value="">
+                                      <span class="form-check-sign">
+                                        <span class="check"></span>
+                                      </span>
+                                    </label>
+                                  </div>
+                                </td>
+                                 <td></td>
+                                <td class="td-actions text-right">
+                                  <button type="button" rel="tooltip" title="Edit Task" class="btn btn-white btn-link btn-sm">
+                                    <i class="material-icons">edit</i>
+                                  </button>
+                                  <button type="button" rel="tooltip" title="Remove" class="btn btn-white btn-link btn-sm">
+                                    <i class="material-icons">close</i>
+                                  </button>
+                                </td>
+                              </tr>
+                              
+                        -->
+                      </div>
+                    </div>
+                  </div>
+                <!--4 divs-->
+            </div>
+          </div>
+        </div>
+      </div>
+      <%- include('./partials/footer'); -%>
